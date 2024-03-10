@@ -14,11 +14,13 @@ datasource db {
 }
 
 model Jet {
-    id        Int      @id @default(autoincrement())
-    name      String   @db.VarChar(255)
+    id        Int       @id @default(autoincrement())
+    name      String    @db.VarChar(255)
     wingspan  Float
     engines   Int
     year      Int
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt DateTime  @default(now())
+    updatedAt DateTime? @updatedAt
+
+    @@map("jets")
 }
