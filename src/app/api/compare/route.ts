@@ -13,9 +13,9 @@ type RequestBody = {
 }
 
 const criteriaPrompts = {
-    "topSpeed": "top speed (return value with units)",
-    "maxSeating": "max speed (return value as integer)",
-    "fuelEfficiency": "fuel efficiency (return value with units)"
+    "topSpeed": "top speed (return value with unit mph)",
+    "maxSeating": "maximum seating (return value as integer)",
+    "fuelEfficiency": "fuel efficiency (return value with unit nm/gal)"
 }
 
 
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
         messages: [
             {
                 role: "system",
-                content: `You are a helpful assistant that compares jets by a comparison critera and outputs the results as a JSON Array. Each object should have the following structure: ${JSON.stringify(exampleJSON)}. Return the data under the key "results"`,
+                content: `You are a helpful assistant that compares jets by a comparison critera and outputs the results as a JSON Array. Each object should have the following structure: ${JSON.stringify(exampleJSON)}. Return the data under the key "results" in order based on the value`,
             },
             { role: "user", content: promptMsg },
         ],
@@ -43,5 +43,5 @@ export async function POST(request: Request) {
         seed: 888
     });
 
-    return Response.json(completion.choices[0].message.content?.trim())
+    return Response.json(completion.choices[0].message.content?.trim(), { status: 200 })
 }
