@@ -45,7 +45,7 @@ export async function POST(request: Request) {
         seed: 888
     });
 
-    const res = JSON.parse(completion.choices[0].message.content?.trim() as string)
+    const res = JSON.parse(completion.choices[0].message.content?.trim() as string) as JetComparisons
 
     // Make sure the data is sorted by value before sending to client. Client will then use index to as rank column value
     const sortedResults = res.results.sort((a: any, b: any) => parseInt(b.value) - parseInt(a.value));
