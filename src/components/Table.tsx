@@ -19,6 +19,7 @@ export default function Table({ initialJets }: Props) {
     const [comparisonData, setComparisonData] = useState<JetComparisonResult[] | null>(null)
     const [loading, setLoading] = useState(false)
     const comparisonResultRef = useRef<null | HTMLTableElement>(null)
+    const [error, setError] = useState<string | null>(null)
 
     const sortJets = (sortBy: SortBy) => {
         const sortOrder = sortConfig?.sortBy === sortBy && sortConfig.sortOrder === 'asc' ? 'desc' : 'asc';
@@ -37,8 +38,11 @@ export default function Table({ initialJets }: Props) {
 
 
     const compareJets = async () => {
+        // reset states
         setLoading(true)
+        setError(null);
         setComparisonData(null)
+
         const body = {
             criteria,
             jets: selectedJets
@@ -50,11 +54,21 @@ export default function Table({ initialJets }: Props) {
                 body: JSON.stringify(body)
             })
 
+            if (!res.ok) {
+                throw new Error("oops there was an error, please try again")
+            }
+
             const data = await res.json()
             setLoading(false)
             setComparisonData(data)
+
         } catch (err) {
             setLoading(false)
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("An unexpected error occurred");
+            }
         }
     }
 
@@ -177,6 +191,9 @@ export default function Table({ initialJets }: Props) {
                     <div className='w-40 mx-auto'>
                         <Loader />
                     </div>
+                )}
+                {error && (
+                    <p className='text-base text-red-500'>{error}</p>
                 )}
                 {comparisonData && (
                     <div>
