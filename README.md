@@ -16,7 +16,7 @@
 
 ## Run in a Self Hosted Enviornment
 
-This requires Docker. The easiest way to install docker use with [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+This requires Docker. The easiest way to install docker is with [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 1. To run the project first clone it
 
