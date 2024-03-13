@@ -1,6 +1,6 @@
-version: "3.8"
+version: '3.8'
 
-services: 
+services:
   postgres:
     image: postgres:latest
     container_name: jet-ai-postgres
@@ -10,9 +10,9 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data # persists jet data in postgres when the container is stopped
-      - /Users/gavinsidhu/Documents/Projects/jet-ai/jet_facts.csv:/data/jet_facts.csv # makes sure the csv file is available in the container to run seed script
+      - ../jet_facts.csv:/data/jet_facts.csv # makes sure the csv file is available in the container to run seed script
     ports:
-      - "5432:5432"
+      - '5432:5432'
     networks:
       - app_network
 
