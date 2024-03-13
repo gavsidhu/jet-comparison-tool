@@ -32,8 +32,14 @@ cd jet-comparison-tool
 
 3. Copy the example `.env.example` to `.env`
 
+For Linux/MacOS
 ```sh
 cp .env.example .env
+```
+
+For Windows 
+```powershell
+copy .env.example .env
 ```
 
 4. Make sure you add a valid OpenAI API Key in the .env file
