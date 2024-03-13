@@ -2,11 +2,11 @@
 
 ## Table of Contents
 
-- [Installation](#run-in-a-self-hosted-enviorment)
+- [Run in a self hosted enviornment](#run-in-a-self-hosted-enviorment)
 
 
 
-# Run in a self hosted enviorment
+# Run in a self hosted enviornment
 
 1. To run the project first clone it
 
@@ -41,7 +41,7 @@ npm install
 6. Start the PostgreSQL service using docker compose in detactched mode
 
 ```sh
-docker compose -f docker-compose.dev.yaml up -d
+docker compose -f docker/docker-compose.dev.yaml up -d
 ```
 
 
