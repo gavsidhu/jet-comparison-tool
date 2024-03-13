@@ -9,7 +9,7 @@ export default async function Home() {
     const data = await getJets();
 
     return (
-        <section className="max-w-5xl mx-auto py-24">
+        <section className="sm:max-w-5xl max-w-full px-4 mx-auto py-24">
             <Table initialJets={data} />
         </section>
     );
