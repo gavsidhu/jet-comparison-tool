@@ -58,6 +58,21 @@ npm install
 
 Make sure Docker Desktop is running.
 
+Also make sure nothing else on your system is running on or listening to port 5432. 
+If there is something running on port 5432 it will cause an error when running the prisma migration and seed commands.
+
+To check:
+
+Linux/MacOS:
+```sh
+sudo lsof -i :5432
+```
+Windows:
+```powershell
+netstat -aon | findstr :5432
+```
+
+Run the Docker container:
 ```sh
 docker compose -f docker/docker-compose.dev.yaml up -d
 ```
