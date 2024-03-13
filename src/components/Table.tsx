@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, cache, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Jet } from '@prisma/client';
 import Loader from './Loader';
 
