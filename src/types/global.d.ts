@@ -1,5 +1,4 @@
 interface JetComparisonResult {
-    rank: string;
     name: string;
     value: string;
 }

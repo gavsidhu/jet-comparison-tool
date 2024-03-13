@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, cache, useEffect, useRef, useState } from 'react';
 import { Jet } from '@prisma/client';
 import Loader from './Loader';
 
@@ -16,7 +16,7 @@ export default function Table({ initialJets }: Props) {
     const [sortConfig, setSortConfig] = useState<{ sortBy: SortBy; sortOrder: SortOrder } | null>(null);
     const [selectedJets, setSelectedJets] = useState<Jet[]>([])
     const [criteria, setCriteria] = useState<string>('topSpeed');
-    const [comparisonData, setComparisonData] = useState<JetComparisons | null>(null)
+    const [comparisonData, setComparisonData] = useState<JetComparisonResult[] | null>(null)
     const [loading, setLoading] = useState(false)
     const comparisonResultRef = useRef<null | HTMLTableElement>(null)
 
@@ -43,14 +43,19 @@ export default function Table({ initialJets }: Props) {
             criteria,
             jets: selectedJets
         }
-        const res = await fetch("api/compare", {
-            method: "POST",
-            body: JSON.stringify(body)
-        })
 
-        const data = await res.json()
-        setLoading(false)
-        setComparisonData(JSON.parse(data))
+        try {
+            const res = await fetch("api/compare", {
+                method: "POST",
+                body: JSON.stringify(body)
+            })
+
+            const data = await res.json()
+            setLoading(false)
+            setComparisonData(data)
+        } catch (err) {
+            setLoading(false)
+        }
     }
 
     // Scroll to results table when it renders
@@ -152,11 +157,11 @@ export default function Table({ initialJets }: Props) {
                         value={criteria}
                         onChange={handleCriteriaChange}
                     >
-                        <option value="topSpeed">Top Speed</option>
-                        <option value="fuelEfficiency">Fuel Efficiency</option>
+                        <option value="topSpeed">Top Speed (mph)</option>
+                        <option value="fuelEfficiency">Fuel Efficiency (nm/gal)</option>
                         <option value="maxSeating">Maximum Seats</option>
                     </select>
-                    <button onClick={compareJets} className="sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1.5 px-4 rounded-md">
+                    <button onClick={compareJets} className="sm:w-auto bg-black hover:bg-gray-800 text-white font-semibold py-1.5 px-4 rounded-md">
                         Compare
                     </button>
                 </div>
@@ -191,9 +196,9 @@ export default function Table({ initialJets }: Props) {
                                     </tr>
                                 </thead>
                                 <tbody className='divide-y divide-gray-200 bg-white'>
-                                    {comparisonData.results.map(data => (
-                                        <tr key={data.rank}>
-                                            <td className="whitespace-nowrap text-left px-2.5 py-3.5 text-sm text-gray-500">{data.rank}</td>
+                                    {comparisonData.map((data, idx) => (
+                                        <tr key={idx}>
+                                            <td className="whitespace-nowrap text-left px-2.5 py-3.5 text-sm text-gray-500">{idx + 1}</td>
                                             <td className="whitespace-nowrap text-left px-2.5 py-3.5 text-sm text-gray-500">{data.name}</td>
                                             <td className="whitespace-nowrap text-left px-2.5 py-3.5 text-sm text-gray-500">{data.value}</td>
                                         </tr>
