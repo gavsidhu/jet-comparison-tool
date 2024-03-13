@@ -54,7 +54,7 @@ OPENAI_API_KEY=YOUR_API_KEY_HERE
 npm install
 ```
 
-6. Start the PostgreSQL service using docker compose in detactched mode
+6. Start the PostgreSQL service using docker compose in detatched mode
 
 Make sure Docker Desktop is running.
 
