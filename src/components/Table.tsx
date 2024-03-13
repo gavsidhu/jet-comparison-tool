@@ -66,6 +66,9 @@ export default function Table({ initialJets }: Props) {
 
     return (
         <div>
+            <div className='py-3'>
+                <h2 className='font-semibold text-xl text-black'>Top 10 Jets</h2>
+            </div>
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg">
                 <table className='divide-y divide-gray-300 w-full'>
                     <thead className='bg-gray-900 text-white'>
