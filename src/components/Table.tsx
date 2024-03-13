@@ -15,7 +15,7 @@ export default function Table({ initialJets }: Props) {
     const [jets, setJets] = useState<Jet[]>(initialJets);
     const [sortConfig, setSortConfig] = useState<{ sortBy: SortBy; sortOrder: SortOrder } | null>(null);
     const [selectedJets, setSelectedJets] = useState<Jet[]>([])
-    const [criteria, setCriteria] = useState<string>('topSpeed');
+    const [criteria, setCriteria] = useState<Criteria>('topSpeed');
     const [comparisonData, setComparisonData] = useState<JetComparisonResult[] | null>(null)
     const [loading, setLoading] = useState(false)
     const comparisonResultRef = useRef<null | HTMLTableElement>(null)
@@ -32,7 +32,7 @@ export default function Table({ initialJets }: Props) {
     };
 
     const handleCriteriaChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        setCriteria(e.target.value);
+        setCriteria(e.target.value as Criteria);
     };
 
 

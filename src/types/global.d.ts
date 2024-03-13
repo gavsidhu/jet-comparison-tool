@@ -6,3 +6,6 @@ interface JetComparisonResult {
 interface JetComparisons {
     results: JetComparisonResult[];
 }
+
+
+type Criteria = "topSpeed" | "maxSeating" | "fuelEfficiency"
