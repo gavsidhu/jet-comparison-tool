@@ -7,8 +7,6 @@ const exampleJSON = {
     name: "<string: name of the jet>", value: "<string/integer: value of the jet for the comparison>"
 }
 
-type Criteria = "topSpeed" | "maxSeating" | "fuelEfficiency"
-
 type RequestBody = {
     criteria: Criteria,
     jets: Jet[]
