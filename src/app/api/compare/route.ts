@@ -53,9 +53,14 @@ export async function POST(request: Request) {
 
         const res = JSON.parse(completion.choices[0].message.content?.trim() as string) as JetComparisons
 
+        // Check if the data returned by openai was in the expected form
+        if (!res.results) {
+            return Response.json({ error: "The data returned was not in expected form: missing results key" }, { status: 400 })
+        }
+
+
         // Make sure the data is sorted by value before sending to client. Client will then use index to as rank column value
         const sortedResults = res.results.sort((a: any, b: any) => parseInt(b.value) - parseInt(a.value));
-        console.log(sortedResults)
 
         return Response.json(sortedResults, { status: 200 })
     } catch (err) {

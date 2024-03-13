@@ -55,7 +55,8 @@ export default function Table({ initialJets }: Props) {
             })
 
             if (!res.ok) {
-                throw new Error("oops there was an error, please try again")
+                const errorMsg = await res.json();
+                throw new Error(errorMsg.error || "An unexpected error occurred");
             }
 
             const data = await res.json()
