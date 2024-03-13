@@ -16,6 +16,8 @@
 
 ## Run in a Self Hosted Enviornment
 
+This requires Docker. The easiest way to install docker use with [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
 1. To run the project first clone it
 
 ```sh
@@ -47,6 +49,8 @@ npm install
 ```
 
 6. Start the PostgreSQL service using docker compose in detactched mode
+
+Make sure Docker Desktop is running.
 
 ```sh
 docker compose -f docker/docker-compose.dev.yaml up -d
