@@ -1,4 +1,5 @@
 # Jet Comparison Tool
+![Demo](public/jet-comparison.gif)
 
 ## Table of Contents
 
